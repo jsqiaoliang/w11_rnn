@@ -32,7 +32,7 @@ class Model():
         self.dim_embedding = dim_embedding
         self.rnn_layers = rnn_layers
         self.learning_rate = learning_rate
-		self.keep_prob=keep_prob
+        self.keep_prob=keep_prob
 
     def build(self, embedding_file='./embedding.npy'):
         # global step
@@ -92,11 +92,7 @@ class Model():
 ##将rnn的输出*权重系数W+b得到待激活前的logits
         logits = tf.matmul(seq_output_final, W) + b
 
-			
-		
 
-
-		
 ##..............................................................................................			
 
         tf.summary.histogram('logits', logits)

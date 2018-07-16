@@ -43,7 +43,8 @@ def get_train_data(vocabulary, batch_size, num_steps):
             X.append(dictionary(word))
         else:
             X.append(dictionary['UNK'])
-		
+
+
     for word in vocabulary[1:]:
         if word in dictionary.keys():
             Y.append(dictionary(word))
@@ -51,26 +52,26 @@ def get_train_data(vocabulary, batch_size, num_steps):
             Y.append(dictionary['UNK'])
 
 ##获取数据长度
-	data_length = len(X)
+    data_length = len(X)
 ##补全label的数据长度
-	Y.append(0)
+    Y.append(0)
 ##计算将数据分为batchsize个分区后，每个分区有多少数据
-	batch_partition_length = data_length // batch_size
+    batch_partition_length = data_length // batch_size
 ##初始化数据X,Y
-	data_x = np.zeros([batch_size, batch_partition_length], dtype=np.int32)
-	data_y = np.zeros([batch_size, batch_partition_length], dtype=np.int32)
-	#将数据X,Y按batch_size分割开
-	for i in range(batch_size):
-		data_x[i] = X[batch_partition_length * i:batch_partition_length * (i + 1)]
-		data_y[i] = Y[batch_partition_length * i:batch_partition_length * (i + 1)]
+    data_x = np.zeros([batch_size, batch_partition_length], dtype=np.int32)
+    data_y = np.zeros([batch_size, batch_partition_length], dtype=np.int32)
+    #将数据X,Y按batch_size分割开
+    for i in range(batch_size):
+        data_x[i] = X[batch_partition_length * i:batch_partition_length * (i + 1)]
+        data_y[i] = Y[batch_partition_length * i:batch_partition_length * (i + 1)]
 ##计算每个batch 在num_steps 训练完，每个epoch size为多少
-	epoch_size = batch_partition_length // num_steps
+    epoch_size = batch_partition_length // num_steps
 ##返回每个step的X和Y
-	for i in range(epoch_size):
-		x = data_x[:, i * num_steps:(i + 1) * num_steps]
-		y = data_y[:, i * num_steps:(i + 1) * num_steps]
-		yield (x, y)
-	
+    for i in range(epoch_size):
+        x = data_x[:, i * num_steps:(i + 1) * num_steps]
+        y = data_y[:, i * num_steps:(i + 1) * num_steps]
+        yield (x, y)
+
 
 
 def build_dataset(words, n_words):

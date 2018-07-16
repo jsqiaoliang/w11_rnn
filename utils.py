@@ -47,7 +47,7 @@ def get_train_data(vocabulary, batch_size, num_steps):
 
     for word in vocabulary[1:]:
         if word in dictionary.keys():
-            Y.append(dictionary(word))
+            Y.append(dictionary[word])
         else:
             Y.append(dictionary['UNK'])
 

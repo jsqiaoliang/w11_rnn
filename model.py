@@ -88,7 +88,7 @@ class Model():
             # Your Code here
             ##################
             W=tf.get_variable('W',[self.dim_embedding, self.num_words],initializer=tf.random_normal_initializer())
-            b=tf.get_variable('b',[self.num_words],initializer=tf.constant_initializer(0,0))
+            b=tf.get_variable('b',[self.num_words],initializer=tf.constant_initializer(0.0))
 ##将rnn的输出*权重系数W+b得到待激活前的logits
         logits = tf.matmul(seq_output_final, W) + b
 
